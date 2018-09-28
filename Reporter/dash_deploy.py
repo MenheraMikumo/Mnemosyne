@@ -9,30 +9,8 @@ import yaml
 
 app = DjangoDash('report')
 
+config = yaml.load(open('config.yaml'))
 loads = yaml.load(open('Reporter/media/report_templates/default.yml'))
-
-#def print_button():
-#    printButton = html.A(['Print PDF'],className="button no-print print",style={'position': "absolute", 'top': '-40', 'right': '0'})
-#    return printButton
-
-#def get_header():
-#    header = html.Div([
-#
-#        html.Div([
-#            html.H5(
-#                'Vanguard 500 Index Fund Investor Shares')
-#        ], className="twelve columns padded")
-#
-#    ], className="row gs-header gs-text-header")
-#    return header
-
-#def get_page(lst):
-#    ret_lst = [print_button()]
-#    for elm in lst:
-#        print(elm)
-#        if list(elm.keys())[0] == 'MD':
-#            ret_lst.append(html.Div(components.MD_half(list(elm.values())[0]),className="row"))
-#    return html.Div(ret_lst,className='page')
 
 app.layout = components.PAGE(*list(loads[0].items())[0])
 
@@ -41,7 +19,7 @@ external_css = ["https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normaliz
         "//fonts.googleapis.com/css?family=Raleway:400,300,600",
         "/static/KQrXdb.css",
         "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css",
-        "/static/bootstrap.min.css",
+#        "/static/bootstrap.min.css",
         ]
 
 for css in external_css:
@@ -50,7 +28,7 @@ for css in external_css:
 external_js = [
         "https://code.jquery.com/jquery-3.2.1.min.js",
         "/static/YaXojL.js",
-        "/static/bootstrap.min.js",
+#        "/static/bootstrap.min.js",
 #        "https://codepen.io/bcd/pen/YaXojL.js"
         ]
 
