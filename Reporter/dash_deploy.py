@@ -14,7 +14,9 @@ config = yaml.load(open('config.yaml'))
 rendered_yaml = Template(open(f'{config["templates_Dir"]}/default.yml').read()).render(**config)
 loads = yaml.load(rendered_yaml)
 
-app.layout = components.PAGE(*list(loads[0].items())[0])
+#app.layout = components.PAGE(*list(loads[0].items())[0])
+#app.layout = html.Div([components.PAGE(*list(page.items())[0], loads['HEADER']) for page in loads['CONTENT']])
+app.layout = components.REPORT(loads)
 
 external_css = ["https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css",
         "https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css",

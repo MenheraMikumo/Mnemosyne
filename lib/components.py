@@ -158,8 +158,28 @@ def print_button():
     printButton = html.A(['Print PDF'],className="button no-print print",style={'position': "absolute", 'top': '-40', 'right': '0'})
     return printButton
 
-def PAGE(id, lst):
-    head = html.Div([
+def PAGE(id, lst, head):
+    menubar = [html.Div([
+        html.Div([
+           dcc.Input(id='hash-box', type='text', className="button no-print", style={'position': "absolute", 'top': '-38.3', 'width':'50%', 'right': '50%'}),
+            ], className = "six cloumns"),
+        html.Div([
+            html.Button('Submit', className="btn btn-primary btn-sm no-print", id='button', style={'position': "absolute", 'top': '-38.3', 'right': '30%'}),
+            ], className = "three columns"),
+        html.Div([
+            print_button(),
+            ], className = "three columns"),
+        ],className = 'row')]
+    head = [ROW(list(elm.values())[0]) for elm in head]
+    ret = [ROW(list(elm.values())[0]) for elm in lst]
+    return  html.Div(
+            head + ret,
+            className = 'page',
+            id = id,
+            )
+
+def REPORT(loads):
+    menubar = [html.Div([
         html.Div([
             dcc.Input(id='hash-box', type='text', className="button no-print", style={'position': "absolute", 'top': '-38.3', 'width':'50%', 'right': '50%'}),
             ], className = "six cloumns"),
@@ -169,13 +189,10 @@ def PAGE(id, lst):
         html.Div([
             print_button(),
             ], className = "three columns"),
-        ],className = 'row')
-    ret = [ROW(list(elm.values())[0]) for elm in lst]
-    ret = [print_button()]+ret
-    return  html.Div(
+        ],className = 'row')]
+    ret = [PAGE(*list(page.items())[0], loads['HEADER']) for page in loads['CONTENT']]
+    ret[0].children = menubar + ret[0].children
+    return html.Div(
             ret,
-            className = 'page',
-            id = id,
             )
-
 
