@@ -1,1 +1,2 @@
-rootDir: /Users/sagene/playground/Mikumo/Mnemosyne/Test
+templates_Dir: Test/Templates
+results_Dir: Test/Results

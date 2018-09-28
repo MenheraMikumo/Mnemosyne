@@ -5,12 +5,14 @@ import dash_html_components as html
 import yaml
 from django_plotly_dash import DjangoDash
 from lib import components
+from jinja2 import Template
 import yaml
 
 app = DjangoDash('report')
 
 config = yaml.load(open('config.yaml'))
-loads = yaml.load(open('Reporter/media/report_templates/default.yml'))
+rendered_yaml = Template(open(f'{config["templates_Dir"]}/default.yml').read()).render(**config)
+loads = yaml.load(rendered_yaml)
 
 app.layout = components.PAGE(*list(loads[0].items())[0])
 
