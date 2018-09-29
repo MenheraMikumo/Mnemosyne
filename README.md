@@ -10,7 +10,10 @@ A report template engine demo
 
 finished a single page demo.
 
+#### v0.02
+
+finished multi-page reports design and hash retriever.
+
 ### TODO
 
-- fixed header and footer for multi-page reports.
-- using hash to retrieve different report.
+- beautify welcome & error pages.
