@@ -161,7 +161,7 @@ def print_button():
 def PAGE(id, lst, head):
     menubar = [html.Div([
         html.Div([
-           dcc.Input(id='hash-box', type='text', className="button no-print", style={'position': "absolute", 'top': '-38.3', 'width':'50%', 'right': '50%'}),
+           dcc.Input(id='hash-box', type='text', className="form no-print", style={'position': "absolute", 'top': '-38.3', 'width':'50%', 'right': '50%'}),
             ], className = "six cloumns"),
         html.Div([
             html.Button('Submit', className="btn btn-primary btn-sm no-print", id='button', style={'position': "absolute", 'top': '-38.3', 'right': '30%'}),
@@ -181,10 +181,10 @@ def PAGE(id, lst, head):
 def REPORT(loads):
     menubar = [html.Div([
         html.Div([
-            dcc.Input(id='hash-box', type='text', className="button no-print", style={'position': "absolute", 'top': '-38.3', 'width':'50%', 'right': '50%'}),
+            dcc.Input(id='hash-box', type='text', className="form no-print", style={'position': "absolute", 'top': '-38.3', 'width':'50%', 'right': '50%'}),
             ], className = "six cloumns"),
         html.Div([
-            html.Button('Submit', className="btn btn-primary btn-sm no-print", id='button', style={'position': "absolute", 'top': '-38.3', 'right': '30%'}),
+            html.Button('Submit', className="btn btn-primary btn-sm no-print", id='submit-button', style={'position': "absolute", 'top': '-38.3', 'right': '30%'}),
             ], className = "three columns"),
         html.Div([
             print_button(),
@@ -193,6 +193,6 @@ def REPORT(loads):
     ret = [PAGE(*list(page.items())[0], loads['HEADER']) for page in loads['CONTENT']]
     ret[0].children = menubar + ret[0].children
     return html.Div(
-            ret,
+            ret,id='fullReport',
             )
 

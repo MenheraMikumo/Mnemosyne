@@ -42,9 +42,9 @@ CONTENT:
             - MD: |
                 目前还支持以下特性：A quick fox jumps over the lazy dog. 我就想试试写这么长会不会崩边。A quick fox jumps over the lazy dog.
             - H6: Plotly Example
-            - CRT: {{results_Dir}}/plot.json
+            - CRT: {{results_Dir}}/{{project}}/plot.json
             - H6: Table Example
-            - TBL: {{results_Dir}}/1.csv
+            - TBL: {{results_Dir}}/{{project}}/1.csv
 
 - PP:
     - ROW:
@@ -84,7 +84,7 @@ CONTENT:
             - MD: |
                 目前还支持以下特性：A quick fox jumps over the lazy dog. 我就想试试写这么长会不会崩边。A quick fox jumps over the lazy dog.
             - H6: Plotly Example
-            - CRT: {{results_Dir}}/plot.json
+            - CRT: {{results_Dir}}/{{project}}/plot.json
             - H6: Table Example
-            - TBL: {{results_Dir}}/1.csv
+            - TBL: {{results_Dir}}/{{project}}/1.csv
 

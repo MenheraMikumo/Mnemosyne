@@ -7,16 +7,85 @@ from django_plotly_dash import DjangoDash
 from lib import components
 from jinja2 import Template
 import yaml
+from dash.dependencies import Input, Output, State
 
 app = DjangoDash('report')
 
 config = yaml.load(open('config.yaml'))
-rendered_yaml = Template(open(f'{config["templates_Dir"]}/default.yml').read()).render(**config)
-loads = yaml.load(rendered_yaml)
+#rendered_yaml = Template(open(f'{config["templates_Dir"]}/default.yml').read()).render(**config)
+#loads = yaml.load(rendered_yaml)
 
-#app.layout = components.PAGE(*list(loads[0].items())[0])
-#app.layout = html.Div([components.PAGE(*list(page.items())[0], loads['HEADER']) for page in loads['CONTENT']])
-app.layout = components.REPORT(loads)
+app.layout = html.Div([
+    html.Div([
+        html.Div([
+            html.Div([
+                dcc.Input(id='hash-box', type='text', className="form no-print", style={'position': "absolute", 'top': '-38.3', 'width':'50%', 'right': '50%'}),
+                ], className = "six cloumns"),
+            html.Div([
+                html.Button('Submit', className="btn btn-primary btn-sm no-print", id='submit-button', style={'position': "absolute", 'top': '-38.3', 'right': '30%'}),
+                ], className = "three columns"),
+            html.Div([
+                components.print_button(),
+                ], className = "three columns"),
+            ],className = 'row'),
+        ],className='page'),
+    ],id='fullReport')
+
+@app.callback(
+        Output('fullReport', 'children'),
+        [Input('submit-button', 'n_clicks')],
+        [State('hash-box', 'value')],
+        )
+def render_report(n_clicks, hash_value):
+    if hash_value == None:
+        return [html.Div([
+            html.Div([
+                html.Div([
+                    dcc.Input(id='hash-box', type='text', className="form no-print", style={'position': "absolute", 'top': '-38.3', 'width':'50%', 'right': '50%'}),
+                    ], className = "six cloumns"),
+                html.Div([
+                    html.Button('Submit', className="btn btn-primary btn-sm no-print", id='submit-button', style={'position': "absolute", 'top': '-38.3', 'right': '30%'}),
+                    ], className = "three columns"),
+                html.Div([
+                    components.print_button(),
+                    ], className = "three columns"),
+                ],className = 'row'),
+            html.Div(
+            dcc.Markdown("""
+# Welcome~
+            """),
+            style = {'top':'50%'}
+            )
+            ],className='page')]
+    else:
+        try:
+            try:
+                params = yaml.load(open(f'{config["results_Dir"]}/{hash_value}/params.yaml'))
+            except:
+                params = yaml.load(open(f'{config["results_Dir"]}/{hash_value}/params.json'))
+            params.update(config)
+            rendered_yaml = Template(open(f'{config["templates_Dir"]}/{params["template"]}.yml').read()).render(**params)
+            loads = yaml.load(rendered_yaml)
+            ret =  components.REPORT(loads).children
+            return ret
+        except:
+            return [html.Div([
+                html.Div([
+                    html.Div([
+                        dcc.Input(id='hash-box', type='text', className="form no-print", style={'position': "absolute", 'top': '-38.3', 'width':'50%', 'right': '50%'}),
+                        ], className = "six cloumns"),
+                    html.Div([
+                        html.Button('Submit', className="btn btn-primary btn-sm no-print", id='submit-button', style={'position': "absolute", 'top': '-38.3', 'right': '30%'}),
+                        ], className = "three columns"),
+                    html.Div([
+                        components.print_button(),
+                        ], className = "three columns"),
+                    ],className = 'row'),
+                dcc.Markdown("""
+#### Error~
+                """)
+                ],className='page')]
+
 
 external_css = ["https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css",
         "https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css",
