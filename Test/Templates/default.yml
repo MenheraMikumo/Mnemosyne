@@ -1,10 +1,7 @@
 HEADER:
     - ROW:
         - COL: 
-            - MD: |
-                ![banner](/static/banner.jpg)
-        - COL: 
-            - H5: Scientific Report
+            - IMG: /static/banner.jpg
 
 CONTENT:
 - Overview:

@@ -110,6 +110,11 @@ def CRT(item):
                     style={'width':'100%'},
                 )
 
+def IMG(string):
+    return html.Div(
+        html.Img(src=string),
+        )
+
 def TBL(string):
     df = pd.read_table(string)
     head = [html.Tr([html.Td(name) for name in df.columns])]
@@ -130,6 +135,7 @@ func_dic = {
         'MD': MD,
         'CRT': CRT,
         'TBL': TBL,
+        'IMG': IMG,
         }
 
 def COL(lst,width="twelve columns"):
