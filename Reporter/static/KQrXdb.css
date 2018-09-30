@@ -180,3 +180,8 @@ a {
 #page-content > div:nth-child(n+2) > a {
   visibility: hidden;
 }
+
+._dash-undo-redo {
+  display: none !important;
+}
+

@@ -58,33 +58,33 @@ def render_report(n_clicks, hash_value):
             )
             ],className='page')]
     else:
-#        try:
-       try:
-           params = yaml.load(open(f'{config["results_Dir"]}/{hash_value}/params.yaml'))
-       except:
-           params = yaml.load(open(f'{config["results_Dir"]}/{hash_value}/params.json'))
-       params.update(config)
-       rendered_yaml = Template(open(f'{config["templates_Dir"]}/{params["template"]}.yml').read()).render(**params)
-       loads = yaml.load(rendered_yaml)
-       ret =  components.REPORT(loads).children
-       return ret
-#        except:
-#            return [html.Div([
-#                html.Div([
-#                    html.Div([
-#                        dcc.Input(id='hash-box', type='text', className="form no-print", style={'position': "absolute", 'top': '-38.3', 'width':'50%', 'right': '50%'}),
-#                        ], className = "six cloumns"),
-#                    html.Div([
-#                        html.Button('Submit', className="btn btn-primary btn-sm no-print", id='submit-button', style={'position': "absolute", 'top': '-38.3', 'right': '30%'}),
-#                        ], className = "three columns"),
-#                    html.Div([
-#                        components.print_button(),
-#                        ], className = "three columns"),
-#                    ],className = 'row'),
-#                dcc.Markdown("""
-##### Error~
-#                """)
-#                ],className='page')]
+        try:
+            try:
+                params = yaml.load(open(f'{config["results_Dir"]}/{hash_value}/params.yaml'))
+            except:
+                params = yaml.load(open(f'{config["results_Dir"]}/{hash_value}/params.json'))
+            params.update(config)
+            rendered_yaml = Template(open(f'{config["templates_Dir"]}/{params["template"]}.yml').read()).render(**params)
+            loads = yaml.load(rendered_yaml)
+            ret =  components.REPORT(loads).children
+            return ret
+        except:
+            return [html.Div([
+                html.Div([
+                    html.Div([
+                        dcc.Input(id='hash-box', type='text', className="form no-print", style={'position': "absolute", 'top': '-38.3', 'width':'50%', 'right': '50%'}),
+                        ], className = "six cloumns"),
+                    html.Div([
+                        html.Button('Submit', className="btn btn-primary btn-sm no-print", id='submit-button', style={'position': "absolute", 'top': '-38.3', 'right': '30%'}),
+                        ], className = "three columns"),
+                    html.Div([
+                        components.print_button(),
+                        ], className = "three columns"),
+                    ],className = 'row'),
+                dcc.Markdown("""
+#### Error~
+                """)
+                ],className='page')]
 
 
 external_css = ["https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css",
